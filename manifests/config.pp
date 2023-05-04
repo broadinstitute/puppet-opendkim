@@ -103,7 +103,6 @@ class opendkim::config inherits opendkim {
   }
 
   if $opendkim::alldomain {
-
     if($opendkim::manage_private_keys == true) {
       file { "${opendkim::configdir}/keys/${opendkim::selector}":
         ensure  => 'file',
@@ -133,9 +132,7 @@ class opendkim::config inherits opendkim {
       group   => $opendkim::group,
       mode    => '0640',
     }
-
   } else {
-
     file { 'opendkim-SigningTable':
       ensure  => 'file',
       path    => "${opendkim::configdir}/SigningTable",
@@ -156,20 +153,21 @@ class opendkim::config inherits opendkim {
 
     $opendkim::keys.each |Hash $key| {
       ensure_resource('file', "${opendkim::configdir}/keys/${key['domain']}", {
-        ensure  => 'directory',
-        recurse => true,
-        owner   => 'root',
-        group   => $opendkim::group,
-        mode    => '0710',
+          ensure  => 'directory',
+          recurse => true,
+          owner   => 'root',
+          group   => $opendkim::group,
+          mode    => '0710',
       })
 
       if($opendkim::manage_private_keys == true) {
         file { "${opendkim::configdir}/keys/${key['domain']}/${key['selector']}":
-          ensure  => 'file',
-          content => $key['privatekey'],
-          owner   => 'root',
-          group   => $opendkim::group,
-          mode    => '0640',
+          ensure    => 'file',
+          content   => $key['privatekey'],
+          owner     => 'root',
+          group     => $opendkim::group,
+          mode      => '0640',
+          show_diff => false,
         }
       }
 

@@ -36,6 +36,8 @@ class opendkim(
   Optional[String]          $hash_algorithms      = $opendkim::params::hash_algorithms,
   Optional[String]          $signaturealgorithm   = $opendkim::params::signaturealgorithm,
   Optional[Integer]         $minimumkeybits       = $opendkim::params::minimumkeybits,
+  Optional[String]          $autorestart          = $opendkim::params::autorestart,
+  Optional[String]          $autorestartrate      = $opendkim::params::autorestartrate,
 
   Array[Struct[{
     domain            => String,
@@ -43,7 +45,7 @@ class opendkim(
     hash_algorithms   => Optional[String],
     publickey         => String,
     publickeyextended => Optional[String],
-    privatekey        => Variant[String,Deferred],
+    privatekey        => Variant[String],
     signingdomains    => Array[String],
   }]]                       $keys                 = $opendkim::params::keys,
 

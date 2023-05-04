@@ -26,6 +26,8 @@ class opendkim::params {
   $hash_algorithms = undef
   $signaturealgorithm = undef
   $minimumkeybits = undef
+  $autorestart = undef
+  $autorestartrate = undef
 
   $keys = []
   $nameservers       = undef

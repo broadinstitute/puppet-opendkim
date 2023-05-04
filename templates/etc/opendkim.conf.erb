@@ -1,5 +1,14 @@
 # THIS FILE IS MANAGED BY PUPPET
 
+<% if @autorestart -%>
+# Auto restart the filter on failures
+AutoRestart <%= @autorestart %>
+<% end -%>
+<% if @autorestartrate -%>
+# Maximum restart rate
+AutoRestartRate <%= @autorestartrate %>
+<% end -%>
+
 # Specifies the path to the process ID file.
 PidFile <%= @pidfile %>
 
